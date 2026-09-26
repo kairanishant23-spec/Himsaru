@@ -1,7 +1,7 @@
 import { Product } from '@/types';
 
-export const PRODUCTS: Product[] = [[
-        /* GHEE */
+export const PRODUCTS: Product[] = [
+  /* GHEE */
         {
           id: 'ghee-1',
           cat: 'ghee',
