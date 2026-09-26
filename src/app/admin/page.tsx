@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { Shield, ShoppingBag, Leaf, MessageSquare, LogOut, ArrowLeft, CheckCircle2, Clock } from 'lucide-react';
+import { Shield, ShoppingBag, Leaf, LogOut, ArrowLeft } from 'lucide-react';
 import { PRODUCTS } from '@/data/products';
 
 export default function AdminPage() {

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/context/CartContext';
-import { X, Star, ShieldCheck, HeartHandshake, Leaf, ArrowRight, Check } from 'lucide-react';
+import { X, Star, ShieldCheck, ArrowRight, Check } from 'lucide-react';
 
 interface ProductDetailsModalProps {
   product: Product | null;

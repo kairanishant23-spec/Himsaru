@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
-import { Search, ShoppingBag, User as UserIcon, Menu, LogOut, Package, Shield } from 'lucide-react';
+import { Search, ShoppingBag, User as UserIcon, Menu, LogOut, Shield } from 'lucide-react';
 
 interface NavbarProps {
   onOpenSearch: () => void;

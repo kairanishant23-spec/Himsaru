@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { X, Mail, Phone, Lock, User as UserIcon, CheckCircle2, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { X, Mail, Lock, CheckCircle2, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export default function AuthModal() {
   const {
@@ -40,7 +40,6 @@ export default function AuthModal() {
 
   const [signupLoading, setSignupLoading] = useState(false);
   const [signupError, setSignupError] = useState('');
-  const [signupSuccess, setSignupSuccess] = useState('');
 
   // Sync prefilled phone if redirected from login
   useEffect(() => {
@@ -374,7 +373,7 @@ export default function AuthModal() {
                     />
                   </div>
                   <p className="text-[11px] text-stone mt-1.5">
-                    We'll check if you have an account or guide you to quick registration.
+                    We&apos;ll check if you have an account or guide you to quick registration.
                   </p>
                 </div>
 

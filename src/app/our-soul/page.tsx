@@ -15,7 +15,7 @@ import DaughtersOfPahad from '@/components/soul/DaughtersOfPahad';
 import MountainRitual from '@/components/soul/MountainRitual';
 import PahadAtmosphere from '@/components/soul/PahadAtmosphere';
 import { Product } from '@/types';
-import { Heart, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function OurSoulPage() {
   const [searchOpen, setSearchOpen] = useState(false);

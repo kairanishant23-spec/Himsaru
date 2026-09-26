@@ -13,7 +13,7 @@ import ProductCard from '@/components/products/ProductCard';
 import ProductDetailsModal from '@/components/products/ProductDetailsModal';
 import { PRODUCTS, CATEGORIES } from '@/data/products';
 import { Product } from '@/types';
-import { ShieldCheck, Heart, Sparkles, Truck, Award, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   const [selectedCat, setSelectedCat] = useState('all');

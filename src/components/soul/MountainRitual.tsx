@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { MOUNTAIN_RITUALS } from '@/data/soulContent';
-import { Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 export default function MountainRitual() {
   const [activeStep, setActiveStep] = useState(1);

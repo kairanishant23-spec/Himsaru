@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { Star, Plus, Check } from 'lucide-react';

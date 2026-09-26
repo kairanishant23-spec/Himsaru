@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { PAHAD_GALLERY, IMPACT_METRICS } from '@/data/soulContent';
-import { MapPin, Heart } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export default function PahadAtmosphere() {
   return (

@@ -7,7 +7,7 @@ export interface ProductVariant {
 
 export interface Product {
   id: string;
-  cat: 'ghee' | 'honey' | 'salt' | 'dal' | 'rice' | 'spice';
+  cat: 'ghee' | 'honey' | 'salt' | 'dal' | 'pulses' | 'rice' | 'spice' | 'spices';
   name: string;
   hindi: string;
   badge?: 'BESTSELLER' | 'NEW' | 'LIMITED' | 'SEASONAL' | 'HERITAGE';

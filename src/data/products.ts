@@ -281,7 +281,7 @@ export const PRODUCTS: Product[] = [
         /* PULSES */
         {
           id: 'pulse-1',
-          cat: 'pulses',
+          cat: 'dal',
           name: 'Pahadi Rajma',
           hindi: 'पहाड़ी राजमा',
           img: 'https://images.unsplash.com/photo-1604929822687-38a1a85c0ed8?w=600&q=80',
@@ -316,7 +316,7 @@ export const PRODUCTS: Product[] = [
 
         {
           id: 'pulse-2',
-          cat: 'pulses',
+          cat: 'dal',
           name: 'Gehat Dal (Horse Gram)',
           hindi: 'गहत दाल — कुलथी',
           img: 'https://images.unsplash.com/photo-1576181256399-834e3b3a49bf?w=600&q=80',
@@ -351,7 +351,7 @@ export const PRODUCTS: Product[] = [
 
         {
           id: 'pulse-3',
-          cat: 'pulses',
+          cat: 'dal',
           name: 'Kale Bhatt (Black Soybean)',
           hindi: 'काले भट्ट',
           img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80',
@@ -387,7 +387,7 @@ export const PRODUCTS: Product[] = [
         /* SPICES */
         {
           id: 'spice-1',
-          cat: 'spices',
+          cat: 'spice',
           name: 'Pahadi Haldi (Turmeric)',
           hindi: 'पहाड़ी हल्दी',
           img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80',

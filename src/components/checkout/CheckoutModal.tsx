@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Address } from '@/types';
-import { X, CheckCircle, ShieldCheck, QrCode, Smartphone, CreditCard, Banknote, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, CheckCircle, QrCode, Smartphone, CreditCard, Banknote, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface CheckoutModalProps {
   isOpen: boolean;
