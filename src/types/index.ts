@@ -1,4 +1,4 @@
-﻿export interface ProductVariant {
+export interface ProductVariant {
   size: string;
   price: number;
   mrp: number;

@@ -1,4 +1,4 @@
-﻿export interface ArtisanProfile {
+export interface ArtisanProfile {
   id: string;
   name: string;
   village: string;

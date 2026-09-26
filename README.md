@@ -1,4 +1,4 @@
-﻿# HIMSARU — Modern Next.js + TypeScript + Tailwind CSS Frontend
+# HIMSARU — Modern Next.js + TypeScript + Tailwind CSS Frontend
 
 This is the elevated, responsive, full-featured modern frontend for HIMSARU built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**.
 

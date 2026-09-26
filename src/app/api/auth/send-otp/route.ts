@@ -1,4 +1,4 @@
-﻿import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // In-memory OTP storage for demo/fallback verification
 // Map: email -> { otp: string, expiresAt: number }
