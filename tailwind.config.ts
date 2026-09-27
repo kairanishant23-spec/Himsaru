@@ -27,9 +27,9 @@ const config: Config = {
         text: "#2c2218",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
-        cormorant: ["var(--font-cormorant)", "serif"],
+        sans: ["'DM Sans'", "var(--font-dm-sans)", "sans-serif"],
+        serif: ["'Playfair Display'", "var(--font-playfair)", "Georgia", "serif"],
+        cormorant: ["'Cormorant'", "var(--font-cormorant)", "serif"],
       },
       boxShadow: {
         card: "0 4px 24px rgba(27, 58, 32, 0.08)",
