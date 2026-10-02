@@ -39,10 +39,10 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
           <Link href="/" className="hover:text-honey transition">
             Home
           </Link>
-          <Link href="/#products" className="hover:text-honey transition">
+          <Link href="/products" className="hover:text-honey transition">
             Products
           </Link>
-          <Link href="/#about" className="hover:text-honey transition">
+          <Link href="/about" className="hover:text-honey transition">
             About Us
           </Link>
           <Link
@@ -54,7 +54,7 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
               story
             </span>
           </Link>
-          <Link href="/#distribute" className="hover:text-honey transition">
+          <Link href="/distribute" className="hover:text-honey transition">
             Distribute
           </Link>
           <Link

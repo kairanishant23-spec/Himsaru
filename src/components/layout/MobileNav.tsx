@@ -46,11 +46,18 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               🏔️ Home
             </Link>
             <Link
-              href="/#products"
+              href="/products"
               onClick={onClose}
               className="block py-2 text-forest hover:text-moss transition"
             >
-              🌾 Sacred Harvests
+              🌾 Sacred Harvests (All Products)
+            </Link>
+            <Link
+              href="/about"
+              onClick={onClose}
+              className="block py-2 text-forest hover:text-moss transition"
+            >
+              📖 About Us
             </Link>
             <Link
               href="/our-soul"
@@ -63,7 +70,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               </span>
             </Link>
             <Link
-              href="/#distribute"
+              href="/distribute"
               onClick={onClose}
               className="block py-2 text-forest hover:text-moss transition"
             >

@@ -94,12 +94,22 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/products" className="hover:text-honey transition">
+                  Products Catalog
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-honey transition">
+                  About Us
+                </Link>
+              </li>
+              <li>
                 <Link href="/our-soul" className="hover:text-honey transition">
                   The Soul &amp; Artisans
                 </Link>
               </li>
               <li>
-                <Link href="/#distribute" className="hover:text-honey transition">
+                <Link href="/distribute" className="hover:text-honey transition">
                   Distribute / Partner
                 </Link>
               </li>
