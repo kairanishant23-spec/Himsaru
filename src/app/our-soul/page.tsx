@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import OfferBar from '@/components/layout/OfferBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import MobileNav from '@/components/layout/MobileNav';
@@ -26,13 +25,10 @@ export default function OurSoulPage() {
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
-      <header className="sticky top-0 left-0 right-0 z-40 w-full shadow-md">
-        <OfferBar />
-        <Navbar
-          onOpenSearch={() => setSearchOpen(true)}
-          onOpenMobileNav={() => setMobileNavOpen(true)}
-        />
-      </header>
+      <Navbar
+        onOpenSearch={() => setSearchOpen(true)}
+        onOpenMobileNav={() => setMobileNavOpen(true)}
+      />
 
       <MobileNav
         isOpen={mobileNavOpen}
