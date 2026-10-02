@@ -85,20 +85,39 @@ export default function SashaktNariStory() {
         </div>
 
         {/* Right column / Mountain Photography */}
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[4/3] group">
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80"
-            alt="Himalayan Mountains"
-            loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8">
-            <h3 className="font-serif text-lg sm:text-2xl font-bold text-white mb-1">
-              🏔 HIMSARU — Him + Saru
-            </h3>
-            <p className="text-xs sm:text-sm text-white/80">
-              &ldquo;Him&rdquo; for the eternal Himalayan snows, &ldquo;Saru&rdquo; for the sacred cedar trees.
-            </p>
+        <div className="relative">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[4/3] group">
+            <img
+              src="/images/himalaya_peak.png"
+              alt="Sacred Himalayan Peaks — Trishul & Nanda Devi"
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent flex flex-col justify-end p-6 sm:p-8">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-honey mb-1">
+                🏔 The Sacred Heights
+              </span>
+              <h3 className="font-serif text-lg sm:text-2xl font-bold text-white mb-1">
+                HIMSARU — Him + Saru
+              </h3>
+              <p className="text-xs sm:text-sm text-white/80">
+                &ldquo;Him&rdquo; for the eternal Himalayan snows, &ldquo;Saru&rdquo; for the sacred cedar trees.
+              </p>
+            </div>
+          </div>
+
+          {/* Floating High-Altitude Ridge Badge */}
+          <div className="hidden sm:flex absolute -bottom-5 -left-5 bg-[#23482a]/95 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl shadow-2xl border border-white/20 items-center gap-3 max-w-xs">
+            <img
+              src="/images/himalaya_ridge.png"
+              alt="Himalayan Pastures & Terraces"
+              className="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0 border border-white/10"
+            />
+            <div>
+              <span className="text-[9px] uppercase font-bold text-honey tracking-wider block">Sacred Terrains</span>
+              <p className="text-xs font-serif font-bold text-white leading-tight">High-Altitude Alpine Ridges</p>
+              <p className="text-[10px] text-white/70">1,800m–3,200m Elevation</p>
+            </div>
           </div>
         </div>
       </div>

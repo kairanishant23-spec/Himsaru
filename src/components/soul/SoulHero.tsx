@@ -6,8 +6,15 @@ import { ArrowDown, Heart, Sparkles, MapPin } from 'lucide-react';
 export default function SoulHero() {
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-forest text-warm">
-      {/* Mountain atmospheric gradient backdrop */}
-      <div className="absolute inset-0 z-0 opacity-25 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-moss via-forest to-bark" />
+      {/* Mountain atmospheric photo backdrop */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/images/himalaya_peak.png"
+          alt="Himalayan Mountain Peaks"
+          className="w-full h-full object-cover object-center opacity-30 scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1b3a20]/90 via-[#1b3a20]/80 to-[#1b3a20]" />
+      </div>
 
       {/* Decorative mountain contours */}
       <div className="absolute -bottom-10 left-0 right-0 h-40 bg-gradient-to-t from-cream to-transparent z-10 pointer-events-none" />

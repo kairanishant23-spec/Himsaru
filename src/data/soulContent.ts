@@ -138,7 +138,7 @@ export const MOUNTAIN_RITUALS: MountainRitualStep[] = [
     description: 'Our Badri cows and wild bees live freely at 1,500m to 3,000m altitude. Far away from industrial smog, they drink pristine glacier waters and graze on natural Himalayan flora like Shankhpushpi, Jatamansi, and alpine clover.',
     traditionNote: 'Indigenous Pahadi cows are never tethered in cramped sheds; they roam the sacred meadows freely.',
     icon: '🏔️',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'
+    image: '/images/himalaya_ridge.png'
   },
   {
     step: 2,
@@ -175,7 +175,7 @@ export const PAHAD_GALLERY: PahadScenery[] = [
     title: 'Terraces of Chamoli at Dawn',
     location: 'Chamoli, Uttarakhand',
     description: 'Ancient stepped farming terraces where organic red rice and mountain pulses thrive with zero chemicals.',
-    image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?w=800&q=80',
+    image: '/images/himalaya_ridge.png',
     tag: 'Pristine Terrains'
   },
   {
@@ -183,7 +183,7 @@ export const PAHAD_GALLERY: PahadScenery[] = [
     title: 'Nanda Devi Sanctuary Peaks',
     location: 'Garhwal Himalayas',
     description: 'The snow-crowned crown of the Himalayas, blessing valley soils with mineral-rich snowmelt.',
-    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80',
+    image: '/images/himalaya_peak.png',
     tag: 'Sacred Heights'
   },
   {
@@ -191,7 +191,7 @@ export const PAHAD_GALLERY: PahadScenery[] = [
     title: 'Misty Alpine Meadows',
     location: 'Bugyal Valley, 2800m',
     description: 'Where indigenous Badri cattle graze on medicinal herbs and high-altitude wild blossoms.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+    image: '/images/himalaya_ridge.png',
     tag: 'Wild Pastures'
   },
   {
