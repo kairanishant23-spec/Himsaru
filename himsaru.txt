@@ -1,0 +1,11 @@
+1. it must be a multi page website with each page connect to the remaining other pages and when the user click on the back or the forward button of his/her keyword of phone must come back to the last page or last section or last thing in the website he/she was doing(thats missing in many section of the website).
+3. about us page to be changed as the last one that it was.
+2. distribution page that's not what it was.
+3. removing all the fake pictures and introducing the real pictures (including of the products) and the ultimate and the authentic look to the website.
+4. searching part to be more precise.
+5. checking for the email OTP part to be verified from the database and the user interface.
+6. check for the workflow the webpages and the database.
+7. and check for all the verification except for the payment gateways.
+8. and checking all the missing part from the new frontend and making it a multi-page website for the easiness of the working.
+9. and the final verification of the frontend and the backend for the final touch and final working.
+10. there is a lack optimisation in the website and the different pages of it and doesnot look so much of the user friendly.

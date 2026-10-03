@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const otpVerificationSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, lowercase: true, trim: true },
-    phone: { type: String, required: true, trim: true },
+    phone: { type: String, trim: true, default: "" },
     otp: { type: String, required: true }, // Single 4-digit OTP sent to both email and phone
     expiresAt: { type: Date, required: true },
     purpose: { type: String, enum: ["signup", "login"], default: "signup" }

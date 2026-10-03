@@ -2,8 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
-const { User } = require("../models");
+const { User, OtpVerification } = require("../models");
 const { auth } = require("../middleware/auth");
+const { sendEmailNotification } = require("../utils/notifications");
 
 const router = express.Router();
 
@@ -27,6 +28,93 @@ const getISTTimestamp = () => new Intl.DateTimeFormat("en-IN", {
   year: "numeric", month: "short", day: "numeric",
   hour: "2-digit", minute: "2-digit", hour12: true
 }).format(new Date());
+
+// ─────────────────────────────────────────────────────────────────────────────
+// @route   POST /api/auth/send-otp
+// @desc    Generate Email OTP, save to DB, and send via SMTP Email
+// @access  Public
+// ─────────────────────────────────────────────────────────────────────────────
+router.post("/send-otp", async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || !email.includes("@")) {
+      return res.status(400).json({ success: false, message: "Valid email address is required." });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+
+    // Generate 6-digit OTP
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+    // Store in MongoDB (overwrite previous pending OTPs)
+    await OtpVerification.deleteMany({ email: cleanEmail });
+    await OtpVerification.create({
+      email: cleanEmail,
+      otp: generatedOtp,
+      expiresAt,
+      purpose: "signup"
+    });
+
+    // Send real email via SMTP
+    const subject = `🔑 HIMSARU: Your Verification OTP is ${generatedOtp}`;
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; rounded: 12px; background-color: #fbf7f0;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="color: #1b3a20; margin: 0; font-size: 24px;">HIMSARU</h2>
+          <p style="color: #c4890a; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px;">Pure Taste of the Himalayas</p>
+        </div>
+        <p style="color: #374151; font-size: 14px; line-height: 1.5;">Hello,</p>
+        <p style="color: #374151; font-size: 14px; line-height: 1.5;">Thank you for registering with HIMSARU. Please use the 6-digit verification code below to confirm your email address:</p>
+        <div style="background-color: #1b3a20; color: #f5b942; font-size: 32px; font-weight: bold; text-align: center; padding: 15px; border-radius: 8px; letter-spacing: 8px; margin: 20px 0;">
+          ${generatedOtp}
+        </div>
+        <p style="color: #6b7280; font-size: 12px; margin-top: 20px; text-align: center;">This code is valid for 10 minutes. If you did not request this code, please ignore this email.</p>
+      </div>
+    `;
+
+    await sendEmailNotification(cleanEmail, subject, htmlContent);
+
+    console.log(`[HIMSARU DB OTP] Generated & sent to ${cleanEmail}`);
+    res.json({ success: true, message: `Verification code sent to ${cleanEmail}` });
+  } catch (err) {
+    console.error("send-otp error:", err);
+    res.status(500).json({ success: false, message: "Failed to send OTP email." });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// @route   POST /api/auth/verify-otp
+// @desc    Verify OTP from DB
+// @access  Public
+// ─────────────────────────────────────────────────────────────────────────────
+router.post("/verify-otp", async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) {
+      return res.status(400).json({ success: false, message: "Email and OTP are required." });
+    }
+    const cleanEmail = email.toLowerCase().trim();
+    const cleanOtp = otp.toString().trim();
+
+    const record = await OtpVerification.findOne({ email: cleanEmail, otp: cleanOtp });
+    if (!record) {
+      return res.status(400).json({ success: false, message: "Invalid or expired verification code." });
+    }
+
+    if (record.expiresAt < new Date()) {
+      await OtpVerification.deleteOne({ _id: record._id });
+      return res.status(400).json({ success: false, message: "Verification code has expired. Please request a new one." });
+    }
+
+    // Clear verified OTP record
+    await OtpVerification.deleteOne({ _id: record._id });
+
+    res.json({ success: true, message: "Email verified successfully!" });
+  } catch (err) {
+    console.error("verify-otp error:", err);
+    res.status(500).json({ success: false, message: "Server error during verification." });
+  }
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // @route   POST /api/auth/register
