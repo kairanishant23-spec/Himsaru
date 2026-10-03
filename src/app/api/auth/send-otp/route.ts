@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const cleanEmail = email.toLowerCase().trim();
 
     // Check backend connection if configured
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://himsaru-at0n.onrender.com/api';
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://himsaru-kyfv.onrender.com';
     
     // Generate a secure 6-digit OTP
     const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
