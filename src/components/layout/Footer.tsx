@@ -11,8 +11,8 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-honey to-gold flex items-center justify-center text-base shadow-sm">
-                🏔
+              <div className="w-9 h-9 rounded-xl overflow-hidden border border-gold/40 shadow-sm flex-shrink-0">
+                <img src="/images/himsaru_logo.png" alt="HIMSARU" className="w-full h-full object-cover" />
               </div>
               <span className="font-serif text-xl font-bold tracking-[0.2em] text-honey">
                 HIMSARU

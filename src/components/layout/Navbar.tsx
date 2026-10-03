@@ -21,8 +21,8 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-honey to-gold flex items-center justify-center text-lg shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
-            🏔
+          <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform flex-shrink-0 border border-gold/40">
+            <img src="/images/himsaru_logo.png" alt="HIMSARU Mountain Logo" className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="font-serif text-lg sm:text-xl font-bold tracking-[0.25em] text-honey block leading-none">

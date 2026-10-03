@@ -300,8 +300,8 @@ export default function AuthModal() {
 
         {/* Brand Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-forest/10 text-forest text-2xl mb-2">
-            🏔️
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl overflow-hidden border border-gold/40 shadow-sm mb-2">
+            <img src="/images/himsaru_logo.png" alt="HIMSARU Logo" className="w-full h-full object-cover" />
           </div>
           <h2 className="text-2xl font-serif font-bold text-forest tracking-wide">HIMSARU</h2>
           <p className="text-xs uppercase tracking-widest text-honey font-semibold">

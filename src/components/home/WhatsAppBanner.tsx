@@ -62,7 +62,9 @@ export default function WhatsAppBanner() {
         {/* Right / Badge Card */}
         <div className="flex justify-center md:justify-end">
           <div className="bg-white border border-mist rounded-2xl p-6 text-center shadow-card w-full max-w-[200px]">
-            <span className="text-4xl block mb-2">💬</span>
+            <div className="w-12 h-12 rounded-xl overflow-hidden border border-gold/30 shadow-sm mx-auto mb-2">
+              <img src="/images/himsaru_logo.png" alt="HIMSARU" className="w-full h-full object-cover" />
+            </div>
             <div className="font-serif font-bold text-forest text-sm">HIMSARU</div>
             <div className="text-xs text-stone mt-0.5">WhatsApp Us</div>
             <div className="mt-3 pt-3 border-t border-mist/70 text-[10px] text-stone">

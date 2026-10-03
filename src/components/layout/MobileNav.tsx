@@ -24,8 +24,10 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
       <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-cream shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-slideIn">
         <div>
           <div className="flex items-center justify-between pb-6 border-b border-mist">
-            <div className="flex items-center gap-2">
-              <span className="text-xl">🏔️</span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg overflow-hidden border border-forest/20 shadow-sm flex-shrink-0">
+                <img src="/images/himsaru_logo.png" alt="HIMSARU" className="w-full h-full object-cover" />
+              </div>
               <span className="font-serif font-bold text-lg text-forest">HIMSARU</span>
             </div>
             <button
