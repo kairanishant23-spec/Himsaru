@@ -49,8 +49,6 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       message: `A 6-digit verification code was sent to ${cleanEmail}.`,
-      // Expose demo code for instant local testing if SMTP service is pending
-      demoOtp: generatedOtp,
     });
   } catch (error: any) {
     return NextResponse.json(

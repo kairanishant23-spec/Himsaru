@@ -545,18 +545,7 @@ export default function AuthModal() {
                   </button>
                 </div>
 
-                {demoOtpNotice && (
-                  <div className="p-2.5 bg-amber/10 border border-amber/30 text-amber text-xs rounded-xl flex items-center justify-between">
-                    <span>💡 Demo Instant Code: <strong>{demoOtpNotice}</strong></span>
-                    <button
-                      type="button"
-                      onClick={() => setSignupOtp(demoOtpNotice)}
-                      className="text-[10px] bg-amber text-white px-2 py-0.5 rounded font-bold"
-                    >
-                      Auto-fill
-                    </button>
-                  </div>
-                )}
+
 
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-forest mb-1.5">
