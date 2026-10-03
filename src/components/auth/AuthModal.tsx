@@ -58,7 +58,7 @@ export default function AuthModal() {
 
   if (!authModalOpen) return null;
 
-  const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://himsaru-at0n.onrender.com/api';
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://himsaru-kyfv.onrender.com';
 
   // ----------------------------------------------------
   // LOGIN FLOW (Mobile First)
