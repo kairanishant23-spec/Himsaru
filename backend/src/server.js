@@ -92,6 +92,7 @@ app.get("/api/health", (req, res) => {
       SMTP_USER: checkKey(process.env.SMTP_USER, "your_gmail@gmail.com"),
       SMTP_PASS: checkKey(process.env.SMTP_PASS, "your_16_char_app_password"),
       FROM_EMAIL: checkKey(process.env.FROM_EMAIL, "HIMSARU <no-reply@himsaru.com>"),
+      RESEND_API_KEY: process.env.RESEND_API_KEY ? `✅ SET (${process.env.RESEND_API_KEY.trim().length} chars)` : "❌ NOT SET",
       SMS_API_KEY: checkKey(process.env.SMS_API_KEY, "your_fast2sms_api_key_here")
     }
   });
