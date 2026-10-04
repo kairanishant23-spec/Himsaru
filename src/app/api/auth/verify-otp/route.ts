@@ -1,10 +1,5 @@
 import { NextResponse } from 'next/server';
 
-declare global {
-  var _himsaruOtpStore: Map<string, { otp: string; expiresAt: number }> | undefined;
-}
-const otpStore = global._himsaruOtpStore || new Map();
-
 export async function POST(req: Request) {
   try {
     const { email, otp } = await req.json();
@@ -17,37 +12,22 @@ export async function POST(req: Request) {
     }
 
     const cleanEmail = email.toLowerCase().trim();
-    const record = otpStore.get(cleanEmail);
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://himsaru-kyfv.onrender.com/api';
 
-    if (!record) {
+    try {
+      const res = await fetch(`${backendUrl}/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, otp: otp.trim() }),
+      });
+      const data = await res.json();
+      return NextResponse.json(data, { status: res.status });
+    } catch (err: any) {
       return NextResponse.json(
-        { success: false, message: 'No verification code requested for this email or it has expired.' },
-        { status: 400 }
+        { success: false, message: 'Unable to reach backend server for verification.' },
+        { status: 503 }
       );
     }
-
-    if (Date.now() > record.expiresAt) {
-      otpStore.delete(cleanEmail);
-      return NextResponse.json(
-        { success: false, message: 'Verification code has expired. Please request a new one.' },
-        { status: 400 }
-      );
-    }
-
-    if (record.otp !== otp.trim()) {
-      return NextResponse.json(
-        { success: false, message: 'Incorrect verification code. Please try again.' },
-        { status: 400 }
-      );
-    }
-
-    // Code is valid
-    otpStore.delete(cleanEmail);
-
-    return NextResponse.json({
-      success: true,
-      message: 'Email verified successfully!',
-    });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: error.message || 'OTP verification failed.' },
