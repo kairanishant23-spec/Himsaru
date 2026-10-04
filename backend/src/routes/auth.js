@@ -72,7 +72,14 @@ router.post("/send-otp", async (req, res) => {
       </div>
     `;
 
-    await sendEmailNotification(cleanEmail, subject, htmlContent);
+    const emailResult = await sendEmailNotification(cleanEmail, subject, htmlContent);
+    if (!emailResult.success) {
+      console.error(`[HIMSARU DB OTP] Email delivery failed for ${cleanEmail}:`, emailResult.error);
+      return res.status(500).json({
+        success: false,
+        message: `Email sending error: ${emailResult.error || 'Please verify SMTP credentials in Render.'}`
+      });
+    }
 
     console.log(`[HIMSARU DB OTP] Generated & sent to ${cleanEmail}`);
     res.json({ success: true, message: `Verification code sent to ${cleanEmail}` });

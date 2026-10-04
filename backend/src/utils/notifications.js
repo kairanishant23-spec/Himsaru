@@ -33,14 +33,14 @@ function withTimeout(promise, ms, label) {
 let _transporter = null;
 function getTransporter() {
   if (_transporter) return _transporter;
-  const smtpHost = cleanEnvVar(process.env.SMTP_HOST);
+  const smtpHost = cleanEnvVar(process.env.SMTP_HOST) || "smtp.gmail.com";
   const smtpPort = Number(cleanEnvVar(process.env.SMTP_PORT)) || 587;
   const smtpUser = cleanEnvVar(process.env.SMTP_USER);
-  const smtpPass = cleanEnvVar(process.env.SMTP_PASS);
+  const rawPass = cleanEnvVar(process.env.SMTP_PASS);
+  const smtpPass = rawPass ? rawPass.replace(/\s+/g, "") : ""; // Remove spaces from 16-char app password
 
   const missingOrPlaceholder =
     !nodemailer ||
-    !smtpHost ||
     !smtpUser || smtpUser === "your_gmail@gmail.com" ||
     !smtpPass || smtpPass === "your_16_char_app_password";
 
@@ -49,15 +49,21 @@ function getTransporter() {
     return null;
   }
 
-  console.log(`✅ [Email] Creating SMTP transporter: ${smtpHost}:${smtpPort} user=${smtpUser}`);
-  _transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpPort === 465,
-    auth: { user: smtpUser, pass: smtpPass },
-    pool: true,
-    maxConnections: 5
-  });
+  console.log(`✅ [Email] Creating SMTP transporter for user=${smtpUser}`);
+  if (smtpHost.includes("gmail") || (smtpUser && smtpUser.includes("@gmail.com"))) {
+    _transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: smtpUser, pass: smtpPass }
+    });
+  } else {
+    _transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: { user: smtpUser, pass: smtpPass },
+      tls: { rejectUnauthorized: false }
+    });
+  }
   return _transporter;
 }
 
