@@ -151,6 +151,36 @@ async function sendSMSNotification(phone, message) {
 async function sendEmailNotification(email, subject, htmlContent) {
   const cleanEmail = email.trim();
   const fromEmail = cleanEnvVar(process.env.FROM_EMAIL) || "HIMSARU <no-reply@himsaru.com>";
+
+  // ── HTTPS Resend Delivery (Never blocked by cloud firewalls on Port 443) ──
+  const resendApiKey = cleanEnvVar(process.env.RESEND_API_KEY);
+  if (resendApiKey) {
+    try {
+      console.log(`📧 [Email Live via Resend] Dispatching to ${cleanEmail}...`);
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          from: cleanEnvVar(process.env.RESEND_FROM) || "onboarding@resend.dev",
+          to: [cleanEmail],
+          subject,
+          html: htmlContent
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log(`✅ [Email Live via Resend] Sent to ${cleanEmail} | ID: ${data.id}`);
+        return { success: true, messageId: data.id };
+      }
+      console.warn("⚠️ [Resend API Error]", data);
+    } catch (e) {
+      console.error("❌ [Resend Fetch Error]", e.message);
+    }
+  }
+
   const transporter = getTransporter();
 
   // ── Simulation mode ───────────────────────────────────────────────────────
@@ -159,7 +189,7 @@ async function sendEmailNotification(email, subject, htmlContent) {
     return { success: true, simulated: true };
   }
 
-  // ── Live mode ─────────────────────────────────────────────────────────────
+  // ── Live SMTP mode ────────────────────────────────────────────────────────
   try {
     const sendFn = transporter.sendMail({
       from: fromEmail,
@@ -168,7 +198,7 @@ async function sendEmailNotification(email, subject, htmlContent) {
       html: htmlContent
     });
 
-    const info = await withTimeout(sendFn, 9000, "Email SMTP");
+    const info = await withTimeout(sendFn, 12000, "Email SMTP");
     console.log(`✅ [Email Live] Sent to ${cleanEmail} | MessageId: ${info.messageId}`);
     return { success: true, messageId: info.messageId };
   } catch (error) {
