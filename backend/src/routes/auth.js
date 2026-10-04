@@ -78,7 +78,7 @@ router.post("/send-otp", async (req, res) => {
     res.json({ success: true, message: `Verification code sent to ${cleanEmail}` });
   } catch (err) {
     console.error("send-otp error:", err);
-    res.status(500).json({ success: false, message: "Failed to send OTP email." });
+    res.status(500).json({ success: false, message: (err && err.message) || "Failed to send OTP email." });
   }
 });
 

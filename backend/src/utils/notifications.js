@@ -444,5 +444,7 @@ async function sendLoginOTP(phone, email, otp) {
 module.exports = {
   notifyOrderStatusUpdate,
   sendSignupOTP,
-  sendLoginOTP
+  sendLoginOTP,
+  sendEmailNotification,
+  sendSMSNotification
 };
