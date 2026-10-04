@@ -176,8 +176,13 @@ async function sendEmailNotification(email, subject, htmlContent) {
         return { success: true, messageId: data.id };
       }
       console.warn("⚠️ [Resend API Error]", data);
+      return {
+        success: false,
+        error: data.message || (data.name ? `${data.name}: ${data.message}` : JSON.stringify(data))
+      };
     } catch (e) {
       console.error("❌ [Resend Fetch Error]", e.message);
+      return { success: false, error: `Resend request failed: ${e.message}` };
     }
   }
 
