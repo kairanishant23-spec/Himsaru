@@ -87,7 +87,7 @@ app.get("/api/health", (req, res) => {
     env: process.env.NODE_ENV || "development",
     mongoConnected: mongoose.connection.readyState === 1,
     diagnostics: {
-      SMTP_HOST: checkKey(process.env.SMTP_HOST, "smtp.gmail.com"),
+      SMTP_HOST: process.env.SMTP_HOST ? `✅ SET (${process.env.SMTP_HOST.trim()})` : "❌ NOT SET",
       SMTP_PORT: process.env.SMTP_PORT ? `✅ SET (${process.env.SMTP_PORT})` : "❌ NOT SET",
       SMTP_USER: checkKey(process.env.SMTP_USER, "your_gmail@gmail.com"),
       SMTP_PASS: checkKey(process.env.SMTP_PASS, "your_16_char_app_password"),
