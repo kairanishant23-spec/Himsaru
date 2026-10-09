@@ -11,42 +11,42 @@ const CATEGORY_ITEMS = [
   {
     id: 'ghee',
     name: 'GHEE',
-    img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&q=80',
+    img: '/images/media__1780213744905.jpg',
   },
   {
     id: 'honey',
     name: 'HONEY',
-    img: 'https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=300&q=80',
+    img: '/images/media__1780213744819.jpg',
   },
   {
     id: 'dal',
     name: 'PULSES',
-    img: 'https://images.unsplash.com/photo-1576181256399-834e3b3a49bf?w=300&q=80',
+    img: '/images/media__1780214367947.jpg',
   },
   {
     id: 'salt',
     name: 'SALT',
-    img: 'https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=300&q=80',
+    img: '/images/media__1780213731161.jpg',
   },
   {
     id: 'spice',
     name: 'SPICES',
-    img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&q=80',
+    img: '/images/media__1780214386448.jpg',
   },
   {
     id: 'rice',
     name: 'RICE & GRAINS',
-    img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&q=80',
+    img: '/images/media__1780214386500.jpg',
   },
   {
     id: 'pickle',
     name: 'PICKLES',
-    img: 'https://images.unsplash.com/photo-1589135233689-d560c5717b9b?w=300&q=80',
+    img: '/images/media__1780214386527.jpg',
   },
   {
     id: 'all',
     name: 'LOCAL ITEMS',
-    img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&q=80',
+    img: '/images/media__1780214436236.jpg',
   },
 ];
 

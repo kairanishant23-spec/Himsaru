@@ -11,7 +11,7 @@ const IMPACT_CARDS = [
   },
   {
     title: 'Preventing Migration',
-    img: '/images/himalaya_ridge.png',
+    img: '/images/himsaru_women_empowerment_1780214326121.png',
   },
   {
     title: 'Sustainable Farming',
@@ -19,7 +19,7 @@ const IMPACT_CARDS = [
   },
   {
     title: 'Healthy Communities',
-    img: '/images/himalaya_peak.png',
+    img: '/images/media__1780214458352.jpg',
   },
 ];
 

@@ -83,7 +83,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               🤝 Distribute
             </Link>
             <Link
-              href="/#contact"
+              href="/contact"
               onClick={onClose}
               className="block py-2 text-forest hover:text-moss transition"
             >

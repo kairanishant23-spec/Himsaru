@@ -33,7 +33,7 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
     { id: 'about', label: 'About Us', href: '/about' },
     { id: 'soul', label: 'The Soul', href: '/our-soul', badge: 'story' },
     { id: 'distribute', label: 'Distribute', href: '/distribute' },
-    { id: 'contact', label: 'Contact', href: '/#contact' },
+    { id: 'contact', label: 'Contact', href: '/contact' },
   ];
 
   return (
