@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import OfferBar from '@/components/layout/OfferBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -8,34 +10,42 @@ import MobileNav from '@/components/layout/MobileNav';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import TrustStrip from '@/components/home/TrustStrip';
 import CategoryGrid from '@/components/home/CategoryGrid';
-import WhatsAppBanner from '@/components/home/WhatsAppBanner';
-import WhyChooseUs from '@/components/home/WhyChooseUs';
+import OurStorySection from '@/components/home/OurStorySection';
+import OurImpactSection from '@/components/home/OurImpactSection';
 import CustomerTestimonials from '@/components/home/CustomerTestimonials';
-import SashaktNariStory from '@/components/home/SashaktNariStory';
+import StayConnected from '@/components/home/StayConnected';
 import ProductCard from '@/components/products/ProductCard';
 import ProductDetailsModal from '@/components/products/ProductDetailsModal';
 import AuthModal from '@/components/auth/AuthModal';
 import CartDrawer from '@/components/cart/CartDrawer';
 import CheckoutModal from '@/components/checkout/CheckoutModal';
 import SearchModal from '@/components/search/SearchModal';
-import { PRODUCTS, CATEGORIES } from '@/data/products';
+import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 
 export default function HomePage() {
-  const [selectedCat, setSelectedCat] = useState('all');
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [detailsProduct, setDetailsProduct] = useState<Product | null>(null);
 
-  const filteredProducts =
-    selectedCat === 'all'
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.cat === selectedCat);
+  // Best Sellers Carousel State
+  const [sliderIndex, setSliderIndex] = useState(0);
+  const CARDS_PER_VIEW = 4;
+  const maxIndex = Math.max(0, PRODUCTS.length - CARDS_PER_VIEW);
+
+  const prevSlide = useCallback(() => {
+    setSliderIndex((i) => Math.max(0, i - 1));
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setSliderIndex((i) => Math.min(maxIndex, i + 1));
+  }, [maxIndex]);
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
-      {/* Sticky Header: Offer Announcement Bar + Brand Navbar */}
+
+      {/* 1. ANNOUNCEMENT BAR & NAVBAR (Sticky Header) */}
       <header className="sticky top-0 left-0 right-0 z-40 w-full shadow-md">
         <OfferBar />
         <Navbar
@@ -44,110 +54,131 @@ export default function HomePage() {
         />
       </header>
 
-      {/* Mobile Navigation Drawer */}
+      {/* MOBILE NAV DRAWER */}
       <MobileNav
         isOpen={mobileNavOpen}
         onClose={() => setMobileNavOpen(false)}
         onOpenSearch={() => setSearchOpen(true)}
       />
 
-      {/* 1. Hero Carousel with 11 Slides, Autoplay, Controls, Stats & Wave */}
+      {/* 2. HERO CAROUSEL (Kept intact with slides, controls & stats) */}
       <HeroCarousel />
 
-      {/* 2. Trust Strip (Free shipping, COD, 100% Natural, Ships 24h) */}
+      {/* 3. TRUST STRIP (4 Badges: 100% Natural, No Adulteration, Women Empowerment, Uttarakhand) */}
       <TrustStrip />
 
-      {/* 3. Browse by Category (6 Visual Collection Cards) */}
-      <CategoryGrid onSelectCategory={(catId) => setSelectedCat(catId)} />
+      {/* 4. OUR COLLECTION (Circular Category Icons with Arrow) */}
+      <CategoryGrid onSelectCategory={() => {
+        const el = document.getElementById('bestsellers');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }} />
 
-      {/* 4. Catalog / Most Loved Harvests */}
-      <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex-1 w-full">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gold/15 border border-gold/30 text-gold text-[11px] font-semibold tracking-widest uppercase mb-3">
-            <span>✨ Most Loved</span>
+      {/* 5. BEST SELLERS (Product Carousel with Left/Right Arrows & Dots) */}
+      <section id="bestsellers" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-cream border-b border-mist/70">
+        <div className="max-w-7xl mx-auto">
+
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <h2 className="font-serif text-2xl sm:text-4xl font-bold text-forest leading-tight">
+                Best Sellers
+              </h2>
+              <p className="text-xs sm:text-sm text-stone mt-1">
+                Our customers&apos; favourites, straight from the mountains.
+              </p>
+            </div>
+
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-forest hover:text-gold transition shrink-0"
+            >
+              <span>View All Products</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-forest">
-            Sacred Creations from the Hills
-          </h2>
-          <p className="text-xs sm:text-sm text-stone mt-3">
-            Pure, lab-tested natural ingredients sourced directly from smallholder terrace farmers.
-          </p>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-2 mt-8">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setSelectedCat(c.id)}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs font-semibold transition-all ${
-                  selectedCat === c.id
-                    ? 'bg-forest text-white shadow-md scale-105'
-                    : 'bg-white text-forest border border-mist hover:bg-warm'
-                }`}
+          {/* Carousel Slider */}
+          <div className="relative">
+            {/* Prev Arrow */}
+            <button
+              onClick={prevSlide}
+              disabled={sliderIndex === 0}
+              aria-label="Previous products"
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm disabled:opacity-30 disabled:cursor-not-allowed transition hover:scale-105"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Track */}
+            <div className="overflow-hidden px-1 py-2">
+              <div
+                className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(calc(-${sliderIndex} * (100% / ${CARDS_PER_VIEW} + 24px / ${CARDS_PER_VIEW})))`
+                }}
               >
-                <span>{c.icon}</span>
-                <span>{c.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+                {PRODUCTS.map((p) => (
+                  <div
+                    key={p.id}
+                    className="flex-none w-[calc(50%-8px)] sm:w-[calc(33.333%-16px)] lg:w-[calc(25%-18px)]"
+                  >
+                    <ProductCard
+                      product={p}
+                      onOpenDetails={(prod) => setDetailsProduct(prod)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-              onOpenDetails={(prod) => setDetailsProduct(prod)}
-            />
-          ))}
+            {/* Next Arrow */}
+            <button
+              onClick={nextSlide}
+              disabled={sliderIndex >= maxIndex}
+              aria-label="Next products"
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm disabled:opacity-30 disabled:cursor-not-allowed transition hover:scale-105"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Dot Indicators */}
+          {PRODUCTS.length > CARDS_PER_VIEW && (
+            <div className="flex justify-center items-center gap-2 mt-8">
+              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSliderIndex(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === sliderIndex
+                      ? 'w-6 h-2 bg-forest'
+                      : 'w-2 h-2 bg-mist hover:bg-stone'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+
         </div>
       </section>
 
-      {/* 5. Direct Founder WhatsApp Access Banner */}
-      <WhatsAppBanner />
+      {/* 6. OUR STORY (Empowering Women. Preserving Traditions. 2-column with stats) */}
+      <OurStorySection />
 
-      {/* 6. Why Choose Us (The HIMSARU Promise) */}
-      <WhyChooseUs />
+      {/* 7. OUR IMPACT (Real People. Lasting Change. 4 Photo Cards) */}
+      <OurImpactSection />
 
-      {/* 7. Customer Love Letters / Testimonials */}
+      {/* 8. WHAT OUR CUSTOMERS SAY (Loved by Many, Trusted by All) */}
       <CustomerTestimonials />
 
-      {/* 8. Born in the Mountains Story + Newsletter Signup */}
-      <SashaktNariStory />
+      {/* 9. STAY CONNECTED (Mountain Backdrop Newsletter Banner) */}
+      <StayConnected />
 
-      {/* 9. Distribute / Partner Section */}
-      <section id="distribute" className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-        <span className="text-xs uppercase tracking-widest text-honey font-bold block mb-2">
-          Partner With Us
-        </span>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-forest mb-4">
-          Become a HIMSARU Distributor
-        </h2>
-        <p className="text-xs sm:text-sm text-stone mb-8 leading-relaxed">
-          Bring the pure taste of Uttarakhand to organic stores, Ayurvedic centers, wellness clinics, and gourmet retailers across India.
-        </p>
-
-        <a
-          href="https://wa.me/917900474328?text=Hello!%20I%20am%20interested%20in%20becoming%20a%20HIMSARU%20distributor."
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 px-8 py-3.5 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-2xl text-xs transition shadow-md hover:shadow-lg"
-        >
-          <span>💬 Chat with Distribution Team</span>
-        </a>
-      </section>
-
-      {/* 10. Direct Mountain Contact Section */}
-      <section id="contact" className="py-16 bg-warm/50 border-t border-mist px-4 text-center">
-        <p className="text-xs text-stone font-medium">Questions about an order or our purity standards?</p>
-        <p className="text-sm font-bold text-forest mt-1">himsaru2025@gmail.com • +91 79004 74328 • +91 90123 24850</p>
-      </section>
-
-      {/* Footer */}
+      {/* 10. FOOTER (Dark Green 4-column layout) */}
       <Footer />
 
-      {/* Modals & Drawers */}
+      {/* MODALS & DRAWERS (Search, Cart, Checkout, Auth, Details) */}
       <AuthModal />
       <CartDrawer onOpenCheckout={() => setCheckoutOpen(true)} />
       <CheckoutModal isOpen={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
@@ -160,6 +191,7 @@ export default function HomePage() {
         product={detailsProduct}
         onClose={() => setDetailsProduct(null)}
       />
+
     </div>
   );
 }

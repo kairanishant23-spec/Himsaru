@@ -5,28 +5,107 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1b3a20] text-warm pt-16 pb-12 border-t border-forest2">
+    <footer className="bg-[#142e19] text-white pt-16 pb-10 border-t border-forest2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
-          {/* Brand Col */}
-          <div className="md:col-span-1 space-y-4">
+
+        {/* 4-column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+
+          {/* Col 1: Brand & Mountain Silhouette */}
+          <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl overflow-hidden border border-gold/40 shadow-sm flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-gold/40 shadow-sm flex-shrink-0">
                 <img src="/images/himsaru_logo.png" alt="HIMSARU" className="w-full h-full object-cover" />
               </div>
-              <span className="font-serif text-xl font-bold tracking-[0.2em] text-honey">
-                HIMSARU
-              </span>
+              <div>
+                <span className="font-serif text-xl font-bold tracking-[0.2em] text-white block leading-none">
+                  HIMSARU
+                </span>
+                <span className="text-[9px] uppercase tracking-wider text-honey block mt-1">
+                  From Himalayan Hands To Your Home
+                </span>
+              </div>
             </div>
-            <p className="text-xs text-warm/70 leading-relaxed">
-              Pure Taste of the Himalayas — Crafted by the people of Uttarakhand, delivered with mountain love.
+            <p className="text-xs text-white/70 leading-relaxed max-w-sm">
+              Bringing authentic, chemical-free superfoods handcrafted by the women of Uttarakhand straight to your doorstep.
             </p>
-            <div className="flex items-center gap-3 pt-1">
+          </div>
+
+          {/* Col 2: Quick Links */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-xs text-white/80">
+              <li>
+                <Link href="/" className="hover:text-honey transition">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-honey transition">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-honey transition">
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-soul" className="hover:text-honey transition">
+                  Impact
+                </Link>
+              </li>
+              <li>
+                <Link href="/distribute" className="hover:text-honey transition">
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact" className="hover:text-honey transition">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Contact Details */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
+              Contact Details
+            </h4>
+            <div className="space-y-2.5 text-xs text-white/80">
+              <p className="flex items-start gap-2">
+                <span>📍</span>
+                <span>Vishalkot Haldwani Tarikhet Almora, Uttarakhand - 263645</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <span>✉️</span>
+                <span>himsaru2025@gmail.com</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <span>🌐</span>
+                <span>WWW.HIMSARU.IN</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <span>📸</span>
+                <span>@himsaruuttarakhand_01</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Col 4: Follow Us & Tagline */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
+              Follow Us
+            </h4>
+            <div className="flex items-center gap-3">
               <a
                 href="https://www.instagram.com/himsaruuttarakhand_01/"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
+                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
                 title="Instagram"
               >
                 📸
@@ -35,130 +114,58 @@ export default function Footer() {
                 href="https://wa.me/917900474328"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
+                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
                 title="WhatsApp"
               >
                 💬
               </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
+                title="Facebook"
+              >
+                👥
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition"
+                title="YouTube"
+              >
+                ▶️
+              </a>
+            </div>
+
+            <div className="pt-4">
+              <span className="font-cormorant italic text-lg sm:text-xl text-honey/90 block">
+                Pure Pahadi • Organic • HIMSARU
+              </span>
             </div>
           </div>
 
-          {/* Shop Categories */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
-              Shop Collections
-            </h4>
-            <ul className="space-y-2.5 text-xs text-warm/80">
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  A2 Badri Cow Ghee
-                </Link>
-              </li>
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  Wild Forest Honey
-                </Link>
-              </li>
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  Pahadi Herb Salt (Pisyun Loon)
-                </Link>
-              </li>
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  Alpine Red &amp; Black Rice
-                </Link>
-              </li>
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  Mountain Pulses (Rajma, Gehat)
-                </Link>
-              </li>
-              <li>
-                <Link href="/#products" className="hover:text-honey transition">
-                  Stone-Ground Spices (Pahadi Haldi)
-                </Link>
-              </li>
-            </ul>
-          </div>
+        </div>
 
-          {/* Company */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
-              Company
-            </h4>
-            <ul className="space-y-2.5 text-xs text-warm/80">
-              <li>
-                <Link href="/" className="hover:text-honey transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="hover:text-honey transition">
-                  Products Catalog
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-honey transition">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/our-soul" className="hover:text-honey transition">
-                  The Soul &amp; Artisans
-                </Link>
-              </li>
-              <li>
-                <Link href="/distribute" className="hover:text-honey transition">
-                  Distribute / Partner
-                </Link>
-              </li>
-              <li>
-                <Link href="/#contact" className="hover:text-honey transition">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin" className="hover:text-honey transition opacity-60">
-                  Admin Portal
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-honey mb-4">
-              Direct Contact
-            </h4>
-            <div className="space-y-2.5 text-xs text-warm/80">
-              <p>📍 Tarikhet, Almora, Uttarakhand, India</p>
-              <p>📞 Vishal: +91 79004 74328</p>
-              <p>📞 Ajay: +91 90123 24850</p>
-              <p>✉️ himsaru2025@gmail.com</p>
-              <div className="pt-2">
-                <a
-                  href="https://wa.me/917900474328?text=Hello%20HIMSARU!%20I%20would%20like%20to%20know%20more."
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-green-700/80 hover:bg-green-700 text-white font-semibold transition text-xs shadow-sm"
-                >
-                  <span>💬</span>
-                  <span>WhatsApp Founders</span>
-                </a>
-              </div>
-            </div>
+        {/* Bottom Bar: Copyright & Policy Links */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
+          <p>© 2025 HIMSARU. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <Link href="/about" className="hover:text-honey transition">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/about" className="hover:text-honey transition">
+              Terms &amp; Conditions
+            </Link>
+            <span>•</span>
+            <Link href="/about" className="hover:text-honey transition">
+              Shipping &amp; Returns
+            </Link>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-warm/60">
-          <p>© {new Date().getFullYear()} <strong className="text-honey">HIMSARU</strong>. All rights reserved. Made with ❤ in the Himalayas.</p>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/80">
-            <span>🏔</span>
-            <span>Proudly Made in Uttarakhand</span>
-          </div>
-        </div>
       </div>
     </footer>
   );

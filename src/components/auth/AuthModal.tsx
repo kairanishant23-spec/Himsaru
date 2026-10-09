@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { X, Mail, Lock, CheckCircle2, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 export default function AuthModal() {
   const {
@@ -14,6 +15,9 @@ export default function AuthModal() {
     setPrefilledPhone,
     loginWithUser,
   } = useAuth();
+
+  // Fix: mobile back button closes this modal instead of leaving the site
+  const handleClose = useModalHistory(authModalOpen, closeAuthModal);
 
   // Login states (Mobile only!)
   const [loginPhone, setLoginPhone] = useState('');
@@ -283,7 +287,7 @@ export default function AuthModal() {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
-      onClick={closeAuthModal}
+      onClick={handleClose}
     >
       <div
         className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-warm/40 p-6 sm:p-8"
@@ -291,7 +295,7 @@ export default function AuthModal() {
       >
         {/* Close Button */}
         <button
-          onClick={closeAuthModal}
+          onClick={handleClose}
           className="absolute top-5 right-5 p-2 rounded-full text-stone hover:text-forest hover:bg-warm/60 transition"
           aria-label="Close"
         >

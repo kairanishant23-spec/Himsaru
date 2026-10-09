@@ -3,6 +3,7 @@
 import React from 'react';
 import { useCart } from '@/context/CartContext';
 import { X, Plus, Minus, Trash2, ArrowRight, ShieldCheck, ShoppingBag } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 interface CartDrawerProps {
   onOpenCheckout: () => void;
@@ -22,6 +23,9 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
     total,
   } = useCart();
 
+  // Fix: mobile back button closes the drawer instead of leaving the site
+  const handleClose = useModalHistory(cartOpen, () => setCartOpen(false));
+
   if (!cartOpen) return null;
 
   return (
@@ -29,7 +33,7 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn"
-        onClick={() => setCartOpen(false)}
+        onClick={handleClose}
       />
 
       {/* Drawer */}
@@ -44,7 +48,7 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
             </span>
           </div>
           <button
-            onClick={() => setCartOpen(false)}
+            onClick={handleClose}
             className="p-2 rounded-full text-stone hover:bg-warm transition"
             aria-label="Close"
           >
@@ -76,7 +80,7 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
                 Explore our raw wild honey, handcrafted Bilona A2 ghee, and sacred mountain salts.
               </p>
               <button
-                onClick={() => setCartOpen(false)}
+                onClick={handleClose}
                 className="px-6 py-2.5 bg-forest text-white rounded-xl text-xs font-semibold hover:bg-forest2 transition shadow"
               >
                 Browse Creations

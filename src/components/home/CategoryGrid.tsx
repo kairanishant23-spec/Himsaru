@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 interface CategoryGridProps {
   onSelectCategory: (catId: string) => void;
@@ -9,45 +10,43 @@ interface CategoryGridProps {
 const CATEGORY_ITEMS = [
   {
     id: 'ghee',
-    name: 'Ghee',
-    sub: 'A2 Badri Cow Ghee',
-    icon: '🫙',
+    name: 'GHEE',
     img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&q=80',
   },
   {
     id: 'honey',
-    name: 'Honey',
-    sub: '4 Wild Varieties',
-    icon: '🍯',
+    name: 'HONEY',
     img: 'https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=300&q=80',
   },
   {
-    id: 'salt',
-    name: 'Salts',
-    sub: 'Silbatta Ground',
-    icon: '🧂',
-    img: 'https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=300&q=80',
-  },
-  {
     id: 'dal',
-    name: 'Pulses',
-    sub: 'Rajma, Gehat, Bhatt',
-    icon: '🫘',
+    name: 'PULSES',
     img: 'https://images.unsplash.com/photo-1576181256399-834e3b3a49bf?w=300&q=80',
   },
   {
+    id: 'salt',
+    name: 'SALT',
+    img: 'https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=300&q=80',
+  },
+  {
     id: 'spice',
-    name: 'Spices',
-    sub: 'Pahadi Haldi',
-    icon: '🌿',
+    name: 'SPICES',
     img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&q=80',
   },
   {
     id: 'rice',
-    name: 'Rice',
-    sub: 'Red, Black, Pahadi',
-    icon: '🌾',
+    name: 'RICE & GRAINS',
     img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&q=80',
+  },
+  {
+    id: 'pickle',
+    name: 'PICKLES',
+    img: 'https://images.unsplash.com/photo-1589135233689-d560c5717b9b?w=300&q=80',
+  },
+  {
+    id: 'all',
+    name: 'LOCAL ITEMS',
+    img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&q=80',
   },
 ];
 
@@ -61,50 +60,53 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   };
 
   return (
-    <section className="bg-warm py-16 px-4 sm:px-6 lg:px-8 border-b border-mist/70">
+    <section className="bg-cream py-14 sm:py-18 px-4 sm:px-6 lg:px-8 border-b border-mist/70">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+        {/* Section Header with decorative lines */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-forest/10 border border-forest/20 text-moss text-[11px] font-semibold tracking-widest uppercase mb-3">
-            <span>🌾 Browse by Category</span>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <span className="w-8 h-[1px] bg-forest/30" />
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-forest/70">
+              OUR COLLECTION
+            </span>
+            <span className="w-8 h-[1px] bg-forest/30" />
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-forest">
-            Our <span className="text-gold">Himalayan</span> Collections
+
+          <h2 className="font-serif text-2xl sm:text-4xl lg:text-[40px] font-bold text-forest leading-tight">
+            Pure Goodness, Straight from the Hills
           </h2>
-          <p className="text-xs sm:text-sm text-stone mt-2">
-            Click on any harvest category to explore our authentic hillside creations.
+
+          <p className="text-xs sm:text-sm text-stone mt-2.5">
+            Explore our range of authentic Himalayan products, crafted with care and tradition.
           </p>
         </div>
 
-        {/* Category Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+        {/* Circular Category Items Row */}
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4 lg:gap-6 justify-items-center">
           {CATEGORY_ITEMS.map((item) => (
-            <div
+            <button
               key={item.id}
               onClick={() => handleClick(item.id)}
-              className="group bg-white rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-cardLg transition-all duration-300 hover:-translate-y-1.5 border border-transparent hover:border-moss/25 text-center flex flex-col"
+              className="group flex flex-col items-center text-center focus:outline-none transition-transform hover:-translate-y-1"
             >
-              {/* Image */}
-              <div className="w-full aspect-square overflow-hidden bg-mist/50">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                />
+              {/* Circular image with warm border and background glow */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full p-1 bg-warm/80 border border-mist shadow-sm group-hover:shadow-md group-hover:border-gold/60 transition-all overflow-hidden flex items-center justify-center">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
               </div>
 
-              {/* Body */}
-              <div className="p-3 sm:p-3.5 flex flex-col items-center">
-                <span className="text-xl mb-1">{item.icon}</span>
-                <span className="text-xs sm:text-sm font-bold text-forest group-hover:text-gold transition-colors">
-                  {item.name}
-                </span>
-                <span className="text-[10px] text-stone mt-0.5 line-clamp-1">
-                  {item.sub}
-                </span>
+              {/* Category Name & Arrow */}
+              <div className="mt-2.5 flex items-center gap-1 text-[11px] sm:text-xs font-bold text-forest group-hover:text-gold transition-colors">
+                <span className="tracking-wider">{item.name}</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

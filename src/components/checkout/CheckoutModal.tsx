@@ -5,6 +5,7 @@ import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Address } from '@/types';
 import { X, CheckCircle, QrCode, Smartphone, CreditCard, Banknote, ArrowLeft, ArrowRight } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -14,6 +15,9 @@ interface CheckoutModalProps {
 export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const { items, total, subtotal, shipping, discount, clearCart } = useCart();
   const { user, addAddress } = useAuth();
+
+  // Fix: mobile back button closes checkout instead of leaving the site
+  const handleClose = useModalHistory(isOpen, onClose);
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'razorpay' | 'cod'>('upi');
@@ -130,14 +134,14 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
         className="relative w-full max-w-xl max-h-[92vh] bg-white rounded-3xl shadow-2xl overflow-y-auto border border-warm p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-5 right-5 p-2 rounded-full text-stone hover:text-forest hover:bg-warm transition z-10"
         >
           <X className="w-5 h-5" />
@@ -409,7 +413,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             </p>
 
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="px-8 py-3 bg-forest text-white font-semibold rounded-xl text-xs hover:bg-forest2 transition shadow"
             >
               Continue Exploring

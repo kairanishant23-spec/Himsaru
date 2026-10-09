@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { X, Star, ShieldCheck, ArrowRight, Check } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 interface ProductDetailsModalProps {
   product: Product | null;
@@ -15,6 +16,9 @@ export default function ProductDetailsModal({ product, onClose }: ProductDetails
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
   const [activeImg, setActiveImg] = useState<string>('');
   const [added, setAdded] = useState(false);
+
+  // Fix: mobile back button closes product details instead of leaving the site
+  const handleClose = useModalHistory(!!product, onClose);
 
   if (!product) return null;
 
@@ -30,14 +34,14 @@ export default function ProductDetailsModal({ product, onClose }: ProductDetails
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
         className="relative w-full max-w-3xl max-h-[90vh] bg-white rounded-3xl shadow-2xl overflow-y-auto border border-warm p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-5 right-5 p-2 rounded-full text-stone hover:text-forest hover:bg-warm transition z-10"
         >
           <X className="w-5 h-5" />

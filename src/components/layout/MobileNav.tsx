@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { X, ShoppingBag, User as UserIcon, LogOut, Shield } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -16,11 +17,14 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
   const { user, openAuthModal, logout } = useAuth();
   const { totalItems, setCartOpen } = useCart();
 
+  // Fix: mobile back button closes this drawer instead of leaving the site
+  const handleClose = useModalHistory(isOpen, onClose);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 md:hidden">
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
       <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-cream shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-slideIn">
         <div>
           <div className="flex items-center justify-between pb-6 border-b border-mist">
@@ -31,7 +35,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               <span className="font-serif font-bold text-lg text-forest">HIMSARU</span>
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 rounded-xl text-stone hover:bg-warm transition"
               aria-label="Close"
             >
@@ -87,7 +91,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
             </Link>
             <button
               onClick={() => {
-                onClose();
+                handleClose();
                 onOpenSearch();
               }}
               className="w-full text-left py-2 text-stone hover:text-forest transition flex items-center gap-2"
@@ -100,7 +104,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
         <div className="pt-6 border-t border-mist space-y-3">
           <button
             onClick={() => {
-              onClose();
+              handleClose();
               setCartOpen(true);
             }}
             className="w-full py-3 bg-warm border border-mist rounded-xl font-semibold text-sm text-forest flex items-center justify-center gap-2"
@@ -118,7 +122,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               {user.role === 'admin' && (
                 <Link
                   href="/admin"
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="w-full py-2.5 bg-forest2 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2"
                 >
                   <Shield className="w-4 h-4" />
@@ -128,7 +132,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
               <button
                 onClick={() => {
                   logout();
-                  onClose();
+                  handleClose();
                 }}
                 className="w-full py-2.5 text-xs text-red-600 font-semibold flex items-center justify-center gap-1.5"
               >
@@ -139,7 +143,7 @@ export default function MobileNav({ isOpen, onClose, onOpenSearch }: MobileNavPr
           ) : (
             <button
               onClick={() => {
-                onClose();
+                handleClose();
                 openAuthModal('login');
               }}
               className="w-full py-3 bg-forest text-white rounded-xl font-semibold text-sm shadow-md flex items-center justify-center gap-2"

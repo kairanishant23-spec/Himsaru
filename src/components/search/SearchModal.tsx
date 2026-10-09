@@ -5,6 +5,7 @@ import { PRODUCTS, CATEGORIES } from '@/data/products';
 import { Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { X, Search as SearchIcon, ArrowRight, ShoppingBag, Sparkles, Tag } from 'lucide-react';
+import { useModalHistory } from '@/hooks/useModalHistory';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -16,6 +17,9 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
   const [query, setQuery] = useState('');
   const [activeCat, setActiveCat] = useState('all');
   const { addToCart } = useCart();
+
+  // Fix: mobile back button closes search modal instead of leaving the site
+  const handleClose = useModalHistory(isOpen, onClose);
 
   // Precise search algorithm with scoring & multi-field relevance
   const filteredProducts = useMemo(() => {
@@ -77,7 +81,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
   return (
     <div
       className="fixed inset-0 z-50 flex items-start justify-center p-3 sm:p-4 pt-12 sm:pt-20 bg-black/65 backdrop-blur-md animate-fadeIn"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
         className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-mist flex flex-col max-h-[85vh]"
@@ -103,7 +107,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
             </button>
           )}
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-1.5 rounded-full text-stone hover:bg-warm transition shrink-0"
             aria-label="Close search"
           >
@@ -190,7 +194,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
                     <div
                       onClick={() => {
                         if (onSelectProduct) onSelectProduct(product);
-                        onClose();
+                        handleClose();
                       }}
                       className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0 cursor-pointer"
                     >

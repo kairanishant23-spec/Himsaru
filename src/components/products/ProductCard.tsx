@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Product, ProductVariant } from '@/types';
 import { useCart } from '@/context/CartContext';
-import { Star, Plus, Check } from 'lucide-react';
+import { Star, Heart, Check, ShoppingBag } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -16,10 +16,7 @@ export default function ProductCard({ product, onOpenDetails }: ProductCardProps
     product.variants[0] || { size: 'Standard', price: 999, mrp: 1200, sku: 'STD' }
   );
   const [added, setAdded] = useState(false);
-
-  const discountPercent = Math.round(
-    ((selectedVariant.mrp - selectedVariant.price) / selectedVariant.mrp) * 100
-  );
+  const [wishlisted, setWishlisted] = useState(false);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -28,24 +25,31 @@ export default function ProductCard({ product, onOpenDetails }: ProductCardProps
     setTimeout(() => setAdded(false), 1500);
   };
 
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setWishlisted(!wishlisted);
+  };
+
   return (
     <div
       onClick={() => onOpenDetails(product)}
-      className="group bg-white rounded-3xl overflow-hidden border border-warm/60 shadow-card hover:shadow-cardLg transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1"
+      className="group bg-white rounded-2xl overflow-hidden border border-mist shadow-sm hover:shadow-cardLg transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1 h-full"
     >
       {/* Product Image & Badges */}
-      <div className="relative aspect-square w-full bg-warm/30 overflow-hidden">
-        {product.badge && (
-          <span className="absolute top-3 left-3 z-10 text-[10px] font-bold uppercase tracking-wider bg-forest text-honey px-2.5 py-1 rounded-full shadow-sm">
-            {product.badge}
-          </span>
-        )}
+      <div className="relative aspect-square w-full bg-mist/30 overflow-hidden">
+        {/* 100% Natural Tag */}
+        <span className="absolute top-2.5 left-2.5 z-10 text-[10px] font-semibold bg-[#2d5a35]/90 text-white px-2.5 py-0.5 rounded-full shadow-sm">
+          🌿 100% Natural
+        </span>
 
-        {discountPercent > 0 && (
-          <span className="absolute top-3 right-3 z-10 text-[10px] font-bold bg-amber text-white px-2 py-0.5 rounded-full shadow-sm">
-            {discountPercent}% OFF
-          </span>
-        )}
+        {/* Heart / Wishlist icon */}
+        <button
+          onClick={handleWishlist}
+          aria-label="Wishlist"
+          className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-white/85 hover:bg-white text-forest flex items-center justify-center transition shadow-sm"
+        >
+          <Heart className={`w-3.5 h-3.5 ${wishlisted ? 'fill-red-500 text-red-500' : 'text-forest'}`} />
+        </button>
 
         <img
           src={product.img}
@@ -56,80 +60,54 @@ export default function ProductCard({ product, onOpenDetails }: ProductCardProps
       </div>
 
       {/* Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-honey font-semibold mb-1">
-            <Star className="w-3.5 h-3.5 fill-current" />
-            <span>4.9</span>
-            <span className="text-stone font-normal">(120+ Pahadi reviews)</span>
-          </div>
-
-          <h3 className="font-serif font-bold text-lg text-forest group-hover:text-moss transition">
+          <h3 className="font-serif font-bold text-sm sm:text-base text-forest group-hover:text-moss transition truncate">
             {product.name}
           </h3>
-          <p className="text-xs text-ltxt font-medium mb-2">{product.hindi}</p>
 
-          <p className="text-xs text-stone line-clamp-2 leading-relaxed mb-4">
-            {product.desc}
-          </p>
-        </div>
+          {/* Price */}
+          <div className="flex items-baseline gap-1 mt-1">
+            <span className="text-base sm:text-lg font-bold text-forest">
+              ₹{selectedVariant.price.toLocaleString('en-IN')}
+            </span>
+            <span className="text-[11px] text-stone">
+              /{selectedVariant.size}
+            </span>
+          </div>
 
-        {/* Variant Pills & Add Button */}
-        <div>
-          {/* Variant selection */}
-          {product.variants.length > 1 && (
-            <div
-              className="flex flex-wrap gap-1.5 mb-3.5"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {product.variants.map((v) => (
-                <button
-                  key={v.size}
-                  onClick={() => setSelectedVariant(v)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition ${
-                    selectedVariant.size === v.size
-                      ? 'bg-forest text-white shadow-sm'
-                      : 'bg-warm/70 text-text hover:bg-mist'
-                  }`}
-                >
-                  {v.size}
-                </button>
+          {/* Rating */}
+          <div className="flex items-center gap-1.5 text-xs text-amber font-semibold mt-1.5 mb-3">
+            <div className="flex items-center gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3 h-3 fill-amber" />
               ))}
             </div>
-          )}
-
-          {/* Price & Action */}
-          <div className="flex items-center justify-between pt-2 border-t border-mist/40">
-            <div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-lg font-bold text-forest">
-                  ₹{selectedVariant.price.toLocaleString('en-IN')}
-                </span>
-                {selectedVariant.mrp > selectedVariant.price && (
-                  <span className="text-xs text-stone line-through">
-                    ₹{selectedVariant.mrp.toLocaleString('en-IN')}
-                  </span>
-                )}
-              </div>
-              <span className="text-[10px] text-moss font-semibold block">
-                Vedic Purity Guaranteed
-              </span>
-            </div>
-
-            <button
-              onClick={handleAdd}
-              className={`p-3 rounded-2xl flex items-center justify-center transition-all ${
-                added
-                  ? 'bg-green-700 text-white scale-105'
-                  : 'bg-forest hover:bg-forest2 text-white shadow-md hover:shadow-lg'
-              }`}
-              title="Add to Basket"
-              aria-label="Add to cart"
-            >
-              {added ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-            </button>
+            <span className="text-[11px] text-stone">4.9 (120+)</span>
           </div>
         </div>
+
+        {/* Full-width ADD TO CART button matching the reference design */}
+        <button
+          onClick={handleAdd}
+          className={`w-full py-2.5 px-4 rounded-xl font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-2 ${
+            added
+              ? 'bg-green-700 text-white'
+              : 'bg-[#1b3a20] hover:bg-[#254f2c] text-white'
+          }`}
+        >
+          {added ? (
+            <>
+              <Check className="w-4 h-4" />
+              <span>ADDED TO CART</span>
+            </>
+          ) : (
+            <>
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>ADD TO CART</span>
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
