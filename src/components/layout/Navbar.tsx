@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Search, ShoppingBag, User as UserIcon, Menu, LogOut, Shield } from 'lucide-react';
@@ -15,6 +16,25 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
   const { totalItems, setCartOpen } = useCart();
   const { user, openAuthModal, logout } = useAuth();
   const [userDropdown, setUserDropdown] = useState(false);
+  const pathname = usePathname();
+  const [activeItem, setActiveItem] = useState('home');
+
+  useEffect(() => {
+    if (pathname === '/products') setActiveItem('products');
+    else if (pathname === '/about') setActiveItem('about');
+    else if (pathname === '/our-soul') setActiveItem('soul');
+    else if (pathname === '/distribute') setActiveItem('distribute');
+    else setActiveItem('home');
+  }, [pathname]);
+
+  const navItems = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'products', label: 'Products', href: '/products' },
+    { id: 'about', label: 'About Us', href: '/about' },
+    { id: 'soul', label: 'The Soul', href: '/our-soul', badge: 'story' },
+    { id: 'distribute', label: 'Distribute', href: '/distribute' },
+    { id: 'contact', label: 'Contact', href: '/#contact' },
+  ];
 
   return (
     <nav className="h-16 bg-[#1b3a20]/95 backdrop-blur-md border-b border-white/10 text-white transition-all flex items-center px-4 sm:px-6 lg:px-8">
@@ -34,35 +54,36 @@ export default function Navbar({ onOpenSearch, onOpenMobileNav }: NavbarProps) {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-7 text-xs font-medium uppercase tracking-wider text-white/75">
-          <Link href="/" className="hover:text-honey transition">
-            Home
-          </Link>
-          <Link href="/products" className="hover:text-honey transition">
-            Products
-          </Link>
-          <Link href="/about" className="hover:text-honey transition">
-            About Us
-          </Link>
-          <Link
-            href="/our-soul"
-            className="flex items-center gap-1.5 text-white/90 hover:text-honey transition font-semibold"
-          >
-            <span>The Soul</span>
-            <span className="text-[9px] lowercase bg-honey/20 text-honey border border-honey/30 px-1.5 py-0.2 rounded-full font-bold">
-              story
-            </span>
-          </Link>
-          <Link href="/distribute" className="hover:text-honey transition">
-            Distribute
-          </Link>
-          <Link
-            href="/#contact"
-            className="bg-gradient-to-r from-gold to-amber hover:from-amber hover:to-honey text-forest font-bold px-4 py-1.5 rounded-full text-xs shadow-sm transition hover:scale-105"
-          >
-            Contact
-          </Link>
+        {/* Desktop Navigation Links with Moving Active Indicator */}
+        <div className="hidden md:flex items-center gap-1.5 p-1 bg-black/20 rounded-full border border-white/10 text-xs font-medium uppercase tracking-wider">
+          {navItems.map((item) => {
+            const isActive = activeItem === item.id;
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                onClick={() => setActiveItem(item.id)}
+                className={`relative px-4 py-1.5 rounded-full transition-all duration-300 flex items-center gap-1.5 ${
+                  isActive
+                    ? 'bg-gradient-to-r from-gold via-amber to-honey text-forest font-bold shadow-md scale-105'
+                    : 'text-white/80 hover:text-honey hover:bg-white/5'
+                }`}
+              >
+                <span>{item.label}</span>
+                {item.badge && (
+                  <span
+                    className={`text-[9px] lowercase px-1.5 py-0.2 rounded-full font-bold transition ${
+                      isActive
+                        ? 'bg-forest/20 text-forest border border-forest/30'
+                        : 'bg-honey/20 text-honey border border-honey/30'
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Actions (Search, Cart, User, Mobile menu) */}
