@@ -9,12 +9,12 @@ export const PRODUCTS: Product[] = [
           hindi: 'बद्री गाय का शुद्ध देसी घी',
           badge: 'BESTSELLER',
           feat: true,
-          img: '/images/media__1780213744905.jpg',
+          img: '/images/himsaru_ghee_jar.jpg',
           imgs: [
+            '/images/himsaru_ghee_jar.jpg',
             '/images/media__1780213744905.jpg',
             '/images/slide6.jpg',
-            'https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=600&q=80',
-            'https://images.unsplash.com/photo-1645696301019-35adcc18cabb?w=600&q=80',
+            '/images/media__1780214458348.jpg',
           ],
           desc: 'Rarest Pahadi ghee — Bilona method, from sacred Badri cows grazing on Himalayan herbs above 1500m.',
           longDesc:
@@ -46,9 +46,9 @@ export const PRODUCTS: Product[] = [
           img: '/images/media__1780213744819.jpg',
           imgs: [
             '/images/media__1780213744819.jpg',
+            '/images/himsaru_honey_jar.jpg',
             '/images/media__1780213744810.jpg',
             '/images/slide4.jpg',
-            '/images/media__1780214458397.jpg',
           ],
           desc: 'Raw, wild Jamun honey with deep floral notes. Known for blood sugar management and antioxidant properties.',
           longDesc:
@@ -82,6 +82,7 @@ export const PRODUCTS: Product[] = [
           img: '/images/media__1780213744810.jpg',
           imgs: [
             '/images/media__1780213744810.jpg',
+            '/images/himsaru_honey_jar.jpg',
             '/images/media__1780213744819.jpg',
             '/images/slide4.jpg',
           ],
@@ -113,8 +114,9 @@ export const PRODUCTS: Product[] = [
           cat: 'honey',
           name: 'Multi Floral Honey',
           hindi: 'बहु-पुष्प शहद',
-          img: '/images/slide4.jpg',
+          img: '/images/himsaru_honey_jar.jpg',
           imgs: [
+            '/images/himsaru_honey_jar.jpg',
             '/images/slide4.jpg',
             '/images/media__1780213744819.jpg',
             '/images/media__1780213744810.jpg',
@@ -150,6 +152,7 @@ export const PRODUCTS: Product[] = [
           img: '/images/media__1780213744819.jpg',
           imgs: [
             '/images/media__1780213744819.jpg',
+            '/images/himsaru_honey_jar.jpg',
             '/images/media__1780213744810.jpg',
             '/images/slide4.jpg',
           ],
@@ -182,8 +185,9 @@ export const PRODUCTS: Product[] = [
           cat: 'salt',
           name: 'Garlic Salt (Silbatta)',
           hindi: 'लहसुन नमक — सिलबट्टा',
-          img: '/images/media__1780213731161.jpg',
+          img: '/images/himsaru_salt_jar.jpg',
           imgs: [
+            '/images/himsaru_salt_jar.jpg',
             '/images/media__1780213731161.jpg',
             '/images/media__1780214658535.jpg',
           ],
@@ -215,6 +219,7 @@ export const PRODUCTS: Product[] = [
           img: '/images/media__1780213731161.jpg',
           imgs: [
             '/images/media__1780213731161.jpg',
+            '/images/himsaru_salt_jar.jpg',
             '/images/media__1780214658535.jpg',
           ],
           desc: "Uttarakhand's legendary Bhang (hemp seed) salt — earthy, nutty, aromatic. A Pahadi kitchen staple.",
@@ -242,8 +247,9 @@ export const PRODUCTS: Product[] = [
           cat: 'salt',
           name: 'Mix Salt (Pisyu Loon)',
           hindi: 'पिस्यूँ लूण — मिक्स',
-          img: '/images/media__1780213731161.jpg',
+          img: '/images/himsaru_salt_jar.jpg',
           imgs: [
+            '/images/himsaru_salt_jar.jpg',
             '/images/media__1780213731161.jpg',
             '/images/media__1780214658535.jpg',
           ],
@@ -275,8 +281,9 @@ export const PRODUCTS: Product[] = [
           cat: 'dal',
           name: 'Pahadi Rajma',
           hindi: 'पहाड़ी राजमा',
-          img: '/images/media__1780214367947.jpg',
+          img: '/images/himsaru_pulses_jars.jpg',
           imgs: [
+            '/images/himsaru_pulses_jars.jpg',
             '/images/media__1780214367947.jpg',
             '/images/slide4.jpg',
             '/images/media__1780214436236.jpg',
@@ -312,6 +319,7 @@ export const PRODUCTS: Product[] = [
           img: '/images/media__1780214367947.jpg',
           imgs: [
             '/images/media__1780214367947.jpg',
+            '/images/himsaru_pulses_jars.jpg',
             '/images/media__1780214436236.jpg',
           ],
           desc: "Uttarakhand's wonder pulse — known for dissolving kidney stones naturally. High protein mountain food.",
@@ -342,8 +350,9 @@ export const PRODUCTS: Product[] = [
           cat: 'dal',
           name: 'Kale Bhatt (Black Soybean)',
           hindi: 'काले भट्ट',
-          img: '/images/media__1780214367947.jpg',
+          img: '/images/himsaru_pulses_jars.jpg',
           imgs: [
+            '/images/himsaru_pulses_jars.jpg',
             '/images/media__1780214367947.jpg',
             '/images/media__1780214436236.jpg',
           ],
@@ -376,8 +385,9 @@ export const PRODUCTS: Product[] = [
           cat: 'spice',
           name: 'Pahadi Haldi (Turmeric)',
           hindi: 'पहाड़ी हल्दी',
-          img: '/images/media__1780214386448.jpg',
+          img: '/images/himsaru_spices_jars.jpg',
           imgs: [
+            '/images/himsaru_spices_jars.jpg',
             '/images/media__1780214386448.jpg',
             '/images/media__1780214386527.jpg',
           ],
@@ -407,8 +417,9 @@ export const PRODUCTS: Product[] = [
           cat: 'rice',
           name: 'Red Rice (Pahadi Laal Chawal)',
           hindi: 'पहाड़ी लाल चावल',
-          img: '/images/media__1780214386500.jpg',
+          img: '/images/himsaru_rice_jars.jpg',
           imgs: [
+            '/images/himsaru_rice_jars.jpg',
             '/images/media__1780214386500.jpg',
             '/images/himalaya_ridge.png',
           ],
@@ -440,8 +451,9 @@ export const PRODUCTS: Product[] = [
           cat: 'rice',
           name: 'Black Rice (Pahadi Kala Chawal)',
           hindi: 'पहाड़ी काला चावल',
-          img: '/images/media__1780214386500.jpg',
+          img: '/images/himsaru_rice_jars.jpg',
           imgs: [
+            '/images/himsaru_rice_jars.jpg',
             '/images/media__1780214386500.jpg',
             '/images/himalaya_ridge.png',
           ],
@@ -473,8 +485,9 @@ export const PRODUCTS: Product[] = [
           cat: 'rice',
           name: 'Pahadi White Rice (Basmati style)',
           hindi: 'पहाड़ी चावल',
-          img: '/images/media__1780214386500.jpg',
+          img: '/images/himsaru_rice_jars.jpg',
           imgs: [
+            '/images/himsaru_rice_jars.jpg',
             '/images/media__1780214386500.jpg',
             '/images/himalaya_ridge.png',
           ],

@@ -20,6 +20,13 @@ export default function ProductDetailsModal({ product, onClose }: ProductDetails
   // Fix: mobile back button closes product details instead of leaving the site
   const handleClose = useModalHistory(!!product, onClose);
 
+  React.useEffect(() => {
+    if (product) {
+      setActiveImg(product.img);
+      setSelectedVariant(product.variants[0] || null);
+    }
+  }, [product]);
+
   if (!product) return null;
 
   const currentVariant = selectedVariant || product.variants[0];

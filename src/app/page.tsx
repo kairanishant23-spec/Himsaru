@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import OfferBar from '@/components/layout/OfferBar';
 import Navbar from '@/components/layout/Navbar';
@@ -24,23 +25,35 @@ import { PRODUCTS } from '@/data/products';
 import { Product } from '@/types';
 
 export default function HomePage() {
+  const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [detailsProduct, setDetailsProduct] = useState<Product | null>(null);
 
-  // Best Sellers Carousel State
+  // Best Sellers Carousel State (moves smoothly from left to right)
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const CARDS_PER_VIEW = 4;
   const maxIndex = Math.max(0, PRODUCTS.length - CARDS_PER_VIEW);
 
   const prevSlide = useCallback(() => {
-    setSliderIndex((i) => Math.max(0, i - 1));
-  }, []);
+    setSliderIndex((i) => (i === 0 ? maxIndex : i - 1));
+  }, [maxIndex]);
 
   const nextSlide = useCallback(() => {
-    setSliderIndex((i) => Math.min(maxIndex, i + 1));
+    setSliderIndex((i) => (i >= maxIndex ? 0 : i + 1));
   }, [maxIndex]);
+
+  // Auto-scroll Best Sellers continuously from left to right
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setSliderIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 3200);
+
+    return () => clearInterval(timer);
+  }, [maxIndex, isPaused]);
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
@@ -68,9 +81,8 @@ export default function HomePage() {
       <TrustStrip />
 
       {/* 4. OUR COLLECTION (Circular Category Icons with Arrow) */}
-      <CategoryGrid onSelectCategory={() => {
-        const el = document.getElementById('bestsellers');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      <CategoryGrid onSelectCategory={(catId) => {
+        router.push(`/products?cat=${catId}`);
       }} />
 
       {/* 5. BEST SELLERS (Product Carousel with Left/Right Arrows & Dots) */}
@@ -98,13 +110,16 @@ export default function HomePage() {
           </div>
 
           {/* Carousel Slider */}
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             {/* Prev Arrow */}
             <button
               onClick={prevSlide}
-              disabled={sliderIndex === 0}
               aria-label="Previous products"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm disabled:opacity-30 disabled:cursor-not-allowed transition hover:scale-105"
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm transition hover:scale-105"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -112,7 +127,7 @@ export default function HomePage() {
             {/* Track */}
             <div className="overflow-hidden px-1 py-2">
               <div
-                className="flex gap-4 sm:gap-6 transition-transform duration-500 ease-in-out"
+                className="flex gap-4 sm:gap-6 transition-transform duration-700 ease-in-out"
                 style={{
                   transform: `translateX(calc(-${sliderIndex} * (100% / ${CARDS_PER_VIEW} + 24px / ${CARDS_PER_VIEW})))`
                 }}
@@ -134,9 +149,8 @@ export default function HomePage() {
             {/* Next Arrow */}
             <button
               onClick={nextSlide}
-              disabled={sliderIndex >= maxIndex}
               aria-label="Next products"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm disabled:opacity-30 disabled:cursor-not-allowed transition hover:scale-105"
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-mist shadow-md flex items-center justify-center text-forest hover:bg-warm transition hover:scale-105"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

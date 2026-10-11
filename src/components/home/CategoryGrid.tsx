@@ -11,52 +11,38 @@ const CATEGORY_ITEMS = [
   {
     id: 'ghee',
     name: 'GHEE',
-    img: '/images/media__1780213744905.jpg',
+    img: '/images/himsaru_ghee_jar.jpg',
   },
   {
     id: 'honey',
     name: 'HONEY',
-    img: '/images/media__1780213744819.jpg',
+    img: '/images/himsaru_honey_jar.jpg',
   },
   {
     id: 'dal',
     name: 'PULSES',
-    img: '/images/media__1780214367947.jpg',
+    img: '/images/himsaru_pulses_jars.jpg',
   },
   {
     id: 'salt',
     name: 'SALT',
-    img: '/images/media__1780213731161.jpg',
+    img: '/images/himsaru_salt_jar.jpg',
   },
   {
     id: 'spice',
     name: 'SPICES',
-    img: '/images/media__1780214386448.jpg',
+    img: '/images/himsaru_spices_jars.jpg',
   },
   {
     id: 'rice',
     name: 'RICE & GRAINS',
-    img: '/images/media__1780214386500.jpg',
-  },
-  {
-    id: 'pickle',
-    name: 'PICKLES',
-    img: '/images/media__1780214386527.jpg',
-  },
-  {
-    id: 'all',
-    name: 'LOCAL ITEMS',
-    img: '/images/media__1780214436236.jpg',
+    img: '/images/himsaru_rice_jars.jpg',
   },
 ];
 
 export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   const handleClick = (catId: string) => {
     onSelectCategory(catId);
-    const el = document.getElementById('products');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (
@@ -81,8 +67,8 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
           </p>
         </div>
 
-        {/* Circular Category Items Row */}
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4 lg:gap-6 justify-items-center">
+        {/* Circular Category Items Row (6 items) */}
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 sm:gap-6 justify-items-center">
           {CATEGORY_ITEMS.map((item) => (
             <button
               key={item.id}

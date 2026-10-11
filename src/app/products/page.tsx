@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import OfferBar from '@/components/layout/OfferBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -15,13 +16,29 @@ import { PRODUCTS, CATEGORIES } from '@/data/products';
 import { Product } from '@/types';
 import { SlidersHorizontal, ArrowUpDown } from 'lucide-react';
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const catParam = searchParams.get('cat');
+  const prodParam = searchParams.get('product');
+
   const [selectedCat, setSelectedCat] = useState('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [detailsProduct, setDetailsProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    if (catParam) {
+      setSelectedCat(catParam);
+    }
+    if (prodParam) {
+      const found = PRODUCTS.find((p) => p.id === prodParam);
+      if (found) {
+        setDetailsProduct(found);
+      }
+    }
+  }, [catParam, prodParam]);
 
   const displayedProducts = useMemo(() => {
     let list = selectedCat === 'all'
@@ -141,5 +158,13 @@ export default function ProductsPage() {
         onClose={() => setDetailsProduct(null)}
       />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-cream flex items-center justify-center">Loading products...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
