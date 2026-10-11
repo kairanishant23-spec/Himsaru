@@ -478,10 +478,6 @@ export const PRODUCTS: Product[] = [
             '/images/media__1780214386500.jpg',
             '/images/himalaya_ridge.png',
           ],
-            'https://images.unsplash.com/photo-1612966759403-e3a40bcf8d91?w=300&q=80',
-            'https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&q=80',
-            'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=80',
-          ],
           desc: 'Traditional Pahadi rice from Uttarakhand mountain terraces — fragrant, long-grain, naturally grown.',
           longDesc:
             'Traditional Pahadi Rice grown on terraced mountain fields using centuries-old farming methods. Irrigated by snowmelt, grown in cool air, and dried in mountain sunshine — this fragrant, naturally aromatic rice carries the freshness of Himalayan fields in every grain.',
